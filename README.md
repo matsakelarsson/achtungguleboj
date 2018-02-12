@@ -17,3 +17,7 @@ Do not use this skeleton code for creating production apps. Security and stabili
 8. Use another device to check what is happening at `<your IP address>:3000` (for this you may need to adjust your computer's firewall to allow connections to Node)
 
 That should be enough to get started. Happy tinkering!
+
+Burndownchart
+
+https://docs.google.com/spreadsheets/d/1mlLCaF66gpmS21sG-uCXPw0NzjV8_YttVipb6cOAHPY/edit#gid=0
