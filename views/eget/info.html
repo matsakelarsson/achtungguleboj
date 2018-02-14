@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="html">
+  <head>
+<link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Achtung Guleboj</title>
+    <script src="https://vuejs.org/js/vue.js"></script>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <main id="main">
+      <section class=backbtn>
+      <a href="/customer"> <img src="img/arrow.svg" width="160px"></a>
+    </section>
+    <img src="img/achtung.png" style="width:65%;"><br><br><br><br><br><br><br><br><br><br>
+    <form class="kundinfo" method="get" action="/orderconf">
+      <p>
+        <p>
+        <label for="persreqs" style="font-size:50pt;height:20%;width:60%;  font-family: 'Concert One', cursive;">Personal requirements</label><br><br><br><br><br>
+        </p>
+        <select multiple id="persreqs" name="preqs" style="font-size:40pt;height:20%;width:60%;  font-family: 'Concert One', cursive;;background-color:#F5F5F5;">
+          <option>Wheelchair</option>
+          <option>Childchair</option>
+          <option>Extra luggage</option>
+          <option>Personal assistance</option>
+        </select>
+      </p>
+      <div class="needs">
+        <p>
+        <label for="otherneeds"></label><br>
+        <input id="otherneeds" name="oneeds" placeholder="Other needs" type="text" style="font-size:45pt;height:20%;width:60%;font-family: 'Josefin Sans', sans-serif;background-color:#F5F5F5;">
+        </p>
+      </div>
+      <div class="travel">
+        <p>
+          <label for="travelers"></label><br>
+          <input id="travelers" name="trvlrs" required="required" placeholder="Number of travelers" type="number" style="font-size:45pt;height:20%;width:60%;font-family: 'Josefin Sans', sans-serif;background-color:#F5F5F5;"><br><br><br><br><br><br>
+        </p>
+      </div>
+      <input type="submit" value="Book Taxi" style="font-size:70pt;height:20%;width:50%;font-family: 'Josefin Sans', sans-serif;"/>
+    </form>
+
+    </main>
+
+  </body>
+</html>

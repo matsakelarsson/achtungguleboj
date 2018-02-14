@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Concert+One');
+
+body {
+  background-color: #E7E7E7;
+  font-family: 'Concert One', cursive;
+  text-align: center;
+
+}
+
+@media screen and (max-width: 800px) {
+    h1 {
+        font-size: 6vw;
+    }
+}
+
+.backbtn {
+  text-align: left;
+
+}
+.map {
+
+}
+
+.addressfields{
+}
+
+.destination{
+
+}
+.journey {
+  font-size: 60pt;
+  text-align: center;
+
+}
+input[type=text"]
+{
+ width: 200px;
+}
+/*style="font-size:30pt;height:20%;width:60%;font-family: 'Josefin Sans', sans-serif;"*/
