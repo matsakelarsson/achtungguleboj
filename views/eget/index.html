@@ -32,7 +32,7 @@
 
 
     <main id="main">
-      <div v-if="indexhtml" class="indexhtml">
+      <div v-show="indexhtml" class="indexhtml">
       <img style="text-align:center;" src="img/achtung.png"><br /><br /><br /><br /><br /><br /><br /><br />
       <div class="Wherego">
           <input v-on:click="goToCustomer" type="button" value="Find Taxi" style="font-size:200%;height:20%;width:70%;font-family: 'Josefin Sans', sans-serif;">
@@ -55,7 +55,7 @@
 
 
 
-    <div class="customerhtml" v-bind:style="{display: showMap}">
+    <div v-show="customerhtml" class="customerhtml">
       <div class="backbtn">
         <img v-on:click="goToIndex" src="img/arrow.svg" width="80px">
       </div>
@@ -89,7 +89,7 @@
 
 
 
-    <div v-if="infohtml" class="infohtml">
+    <div v-show="infohtml" class="infohtml">
       <div class=backbtn>
       <img v-on:click="goToCustomer" src="img/arrow.svg" width="210px">
     </div>
@@ -138,7 +138,7 @@
 
 
 
-    <div v-if="orderconfhtml" class="orderconfhtml">
+    <div v-show="orderconfhtml" class="orderconfhtml">
       <div>
         <img src="img/achtung.png" style="width:50%;">
         <h1 style="font-size: 25pt;">Order confirmation</h1>

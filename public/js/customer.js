@@ -12,7 +12,6 @@ var vm = new Vue({
     fromMarker: null,
     destMarker: null,
     taxiMarkers: {},
-    showMap: "none",
     indexhtml: true,
     customerhtml: false,
     infohtml: false,
@@ -123,7 +122,8 @@ var vm = new Vue({
       this.customerhtml = true;
       this.infohtml = false;
       this.orderconfhtml = false;
-      this.showMap = 'block';
+      setTimeout(function(){ this.map.invalidateSize()}.bind(this), 100);
+
 
 
     },
