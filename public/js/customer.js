@@ -12,6 +12,7 @@ var vm = new Vue({
     fromMarker: null,
     destMarker: null,
     taxiMarkers: {},
+    showMap: "none",
     indexhtml: true,
     customerhtml: false,
     infohtml: false,
@@ -122,6 +123,8 @@ var vm = new Vue({
       this.customerhtml = true;
       this.infohtml = false;
       this.orderconfhtml = false;
+      this.showMap = 'block';
+
 
     },
 
@@ -130,6 +133,7 @@ var vm = new Vue({
       this.customerhtml = false;
       this.infohtml = true;
       this.orderconfhtml = false;
+      this.showMap = "none";
     },
     goToOrderconf: function() {
       this.indexhtml = false;
@@ -147,5 +151,5 @@ var vm = new Vue({
     },
     }
 
-  
+
 });

@@ -55,7 +55,7 @@
 
 
 
-    <div v-if="customerhtml" class="customerhtml">
+    <div class="customerhtml" v-bind:style="{display: showMap}">
       <div class="backbtn">
         <img v-on:click="goToIndex" src="img/arrow.svg" width="80px">
       </div>
@@ -64,7 +64,7 @@
       </h1>
       <p style="font-size:150%">Search for destination first, then pick-up location</p>
       <div>
-        <div id="page">
+        <div>
         <div id="my-map"></div><br><br>
         </div>
         <div>
