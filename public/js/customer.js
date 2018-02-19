@@ -65,14 +65,13 @@ var vm = new Vue({
         attribution: osmAttrib,
         maxZoom: 18
     }).addTo(this.map);
-    //this.map.on('click', this.handleClick);
+//    this.map.on('click', this.handleClick);
 
-    var searchDestControl = L.esri.Geocoding.geosearch({allowMultipleResults: false, zoomToResult: false, placeholder: "Destination"  }).addTo(this.map);
-    var searchFromControl = L.esri.Geocoding.geosearch({allowMultipleResults: false, zoomToResult: false, placeholder: "From"});
+    var searchDestControl = L.esri.Geocoding.geosearch({collapsed:false,expanded:true,allowMultipleResults: false, zoomToResult: false, placeholder: "Destination"}).addTo(this.map);
+    var searchFromControl = L.esri.Geocoding.geosearch({collapsed:false,expanded:true,allowMultipleResults: false, zoomToResult: false, placeholder: "From"});
     // listen for the results event and add the result to the map
     searchDestControl.on("results", function(data) {
-        console.log(searchDestControl);
-        this.destMarker = L.marker(data.latlng, {draggable: true}).addTo(this.map);
+        this.destMarker = L.marker(data.latlng, {draggable: false}).addTo(this.map);
         this.destMarker.on("drag", this.moveMarker);
         searchFromControl.addTo(this.map);
 
@@ -80,8 +79,7 @@ var vm = new Vue({
 
     // listen for the results event and add the result to the map
     searchFromControl.on("results", function(data) {
-        console.log(searchFromControl);
-        this.fromMarker = L.marker(data.latlng, {icon: this.fromIcon, draggable: true}).addTo(this.map);
+        this.fromMarker = L.marker(data.latlng, {icon: this.fromIcon, draggable: false}).addTo(this.map);
         this.fromMarker.on("drag", this.moveMarker);
         this.connectMarkers = L.polyline([this.fromMarker.getLatLng(), this.destMarker.getLatLng()], {color: 'blue'}).addTo(this.map);
     }.bind(this));
@@ -147,5 +145,7 @@ var vm = new Vue({
       this.orderconfhtml = false;
 
     },
+    }
+
   }
 });
