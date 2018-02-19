@@ -27,22 +27,7 @@ app.use('/esri-leaflet-geocoder', express.static(path.join(__dirname, '/node_mod
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'views/eget/index.html'));
 });
-// Serve customer.html as /customer
-app.get('/customer', function (req, res) {
-  res.sendFile(path.join(__dirname, 'views/customer.html'));
-});
-// Serve travel.html as /travel
-app.get('/travel', function (req, res) {
-  res.sendFile(path.join(__dirname, 'views/eget/travel.html'));
-});
-// Serve info.html as /info
-app.get('/info', function (req, res) {
-  res.sendFile(path.join(__dirname, 'views/eget/info.html'));
-});
-// Serve orderconf.html as /orderconf
-app.get('/orderconf', function (req, res) {
-  res.sendFile(path.join(__dirname, 'views/eget/orderconf.html'));
-});
+
 // Serve driver.html as /driver
 app.get('/driver', function (req, res) {
   res.sendFile(path.join(__dirname, 'views/driver.html'));

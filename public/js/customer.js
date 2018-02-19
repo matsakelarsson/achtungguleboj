@@ -5,13 +5,17 @@
 var socket = io();
 
 var vm = new Vue({
-  el: '#page',
+  el: '#main',
   data: {
     orderId: null,
     map: null,
     fromMarker: null,
     destMarker: null,
-    taxiMarkers: {}
+    taxiMarkers: {},
+    indexhtml: true,
+    customerhtml: false,
+    infohtml: false,
+    orderconfhtml: false,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -61,19 +65,22 @@ var vm = new Vue({
         attribution: osmAttrib,
         maxZoom: 18
     }).addTo(this.map);
-    this.map.on('click', this.handleClick);
+    //this.map.on('click', this.handleClick);
 
-    var searchDestControl = L.esri.Geocoding.geosearch({allowMultipleResults: false, zoomToResult: false, placeholder: "Destination"}).addTo(this.map);
+    var searchDestControl = L.esri.Geocoding.geosearch({allowMultipleResults: false, zoomToResult: false, placeholder: "Destination"  }).addTo(this.map);
     var searchFromControl = L.esri.Geocoding.geosearch({allowMultipleResults: false, zoomToResult: false, placeholder: "From"});
     // listen for the results event and add the result to the map
     searchDestControl.on("results", function(data) {
+        console.log(searchDestControl);
         this.destMarker = L.marker(data.latlng, {draggable: true}).addTo(this.map);
         this.destMarker.on("drag", this.moveMarker);
         searchFromControl.addTo(this.map);
+
     }.bind(this));
 
     // listen for the results event and add the result to the map
     searchFromControl.on("results", function(data) {
+        console.log(searchFromControl);
         this.fromMarker = L.marker(data.latlng, {icon: this.fromIcon, draggable: true}).addTo(this.map);
         this.fromMarker.on("drag", this.moveMarker);
         this.connectMarkers = L.polyline([this.fromMarker.getLatLng(), this.destMarker.getLatLng()], {color: 'blue'}).addTo(this.map);
@@ -103,7 +110,7 @@ var vm = new Vue({
         this.fromMarker = L.marker(event.latlng, {icon: this.fromIcon, draggable: true}).addTo(this.map);
         this.fromMarker.on("drag", this.moveMarker);
         this.connectMarkers = L.polyline([this.fromMarker.getLatLng(), this.destMarker.getLatLng()], {color: 'blue'}).addTo(this.map);
-      } 
+      }
     },
     moveMarker: function (event) {
       this.connectMarkers.setLatLngs([this.fromMarker.getLatLng(), this.destMarker.getLatLng()], {color: 'blue'});
@@ -111,6 +118,34 @@ var vm = new Vue({
                                 latLong: [event.target.getLatLng().lat, event.target.getLatLng().lng]
                                 });
                                 */
-    }
+    },
+    goToCustomer: function() {
+      this.indexhtml = false;
+      this.customerhtml = true;
+      this.infohtml = false;
+      this.orderconfhtml = false;
+
+    },
+
+    goToInfo: function() {
+      this.indexhtml = false;
+      this.customerhtml = false;
+      this.infohtml = true;
+      this.orderconfhtml = false;
+    },
+    goToOrderconf: function() {
+      this.indexhtml = false;
+      this.customerhtml = false;
+      this.infohtml = false;
+      this.orderconfhtml = true;
+
+    },
+    goToIndex: function() {
+      this.indexhtml = true;
+      this.customerhtml = false;
+      this.infohtml = false;
+      this.orderconfhtml = false;
+
+    },
   }
 });
