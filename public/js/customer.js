@@ -16,6 +16,11 @@ var vm = new Vue({
     customerhtml: false,
     infohtml: false,
     orderconfhtml: false,
+    checkboxArr: [],
+    needs: '',
+    travelers: 0,
+    otherNeeds: false,
+    travelShow: false,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -141,6 +146,26 @@ var vm = new Vue({
       this.infohtml = false;
       this.orderconfhtml = true;
 
+      var checkbox = document.getElementsByName('check');
+         var length = checkbox.length;
+         for (var i = 0; i < length; ++i){
+           if (checkbox[i].checked){
+             this.checkboxArr.push(checkbox[i].value);
+             //this.infoArr.push(radio[i].value);
+           }
+         }
+         var needs = document.getElementById('otherneeds').value;
+         var amountOfTravelers = document.getElementById('travelers').value;
+         if (needs != ''){
+           this.otherNeeds = true;
+         }
+         if (amountOfTravelers > 0){
+           this.travelShow = true;
+         }
+         this.needs = needs;
+         this.travelers = amountOfTravelers;
+
+         console.log(this.checkboxArr);
     },
     goToIndex: function() {
       this.indexhtml = true;
