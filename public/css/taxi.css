@@ -12,5 +12,30 @@ body {
 }
 
 .popup-list {
-	padding-left: 0;
+	padding-left: lem auto;
 }
+
+.wrapper {
+     display: grid;
+     grid-gap: 10px;
+     grid-template-columns: 49% 49%;
+     background-color: #fff;
+     color: #444;
+		 padding-left:2%;
+ }
+
+ .box {
+     background-color: #444;
+     color: #fff;
+     border-radius: 5px;
+     padding: 20px;
+     font-size: 150%;
+
+ }
+
+ .pending {
+     grid-column: 1;
+ }
+ .planned {
+     grid-column: 2 ;
+ }

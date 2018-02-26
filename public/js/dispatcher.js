@@ -8,6 +8,7 @@ var vm = new Vue({
   el: '#page',
   data: {
     orders: {},
+    plannedorders:{},
     taxis: {},
     customerMarkers: {},
     taxiMarkers: {}
