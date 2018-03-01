@@ -129,8 +129,6 @@ var vm = new Vue({
       this.orderconfhtml = false;
       setTimeout(function(){ this.map.invalidateSize()}.bind(this), 100);
 
-
-
     },
 
     goToInfo: function() {
