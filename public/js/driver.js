@@ -5,13 +5,16 @@
 var socket = io();
 
 var vm = new Vue({
-  el: '#page',
+  el: '#main',
   data: {
     map: null,
     taxiId: 0,
     taxiLocation: null,
     orders: {},
-    customerMarkers: {}
+    customerMarkers: {},
+	 driverhtml: false,
+	 ordershtml: false,
+   taxiInfohtml: true,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -38,7 +41,7 @@ var vm = new Vue({
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min)) + min;
     }
-    // It's probably not a good idea to generate a random taxi number, client-side. 
+    // It's probably not a good idea to generate a random taxi number, client-side.
     this.taxiId = getRandomInt(1, 1000000);
   },
   mounted: function () {
@@ -102,5 +105,22 @@ var vm = new Vue({
       var connectMarkers = L.polyline([order.fromLatLong, order.destLatLong], {color: 'blue'}).addTo(this.map);
       return {from: fromMarker, dest: destMarker, line: connectMarkers};
     },
+	 goToOrders: function() {
+		this.driverhtml = false;
+		this.ordershtml = true;
+    this.taxiInfohtml = false;
+	 },
+	 goToDriver: function() {
+		this.driverhtml = true;
+		this.ordershtml = false;
+    this.taxiInfohtml = false;
+    setTimeout(function(){ this.map.invalidateSize()}.bind(this), 100);
+	 },
+	 addElem: function() {
+		var ul = document.getElementById("list");
+		var li = document.createElement("li");
+		this.orders.push(document.createTextNode("Pause"));
+		//ul.appendChild(li);
+	},
   }
 });

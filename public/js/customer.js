@@ -133,8 +133,6 @@ var vm = new Vue({
       this.infoTransporthtml = false;
       setTimeout(function(){ this.map.invalidateSize()}.bind(this), 100);
 
-
-
     },
 
     goToInfo: function() {

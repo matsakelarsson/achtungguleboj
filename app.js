@@ -28,6 +28,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'views/eget/index.html'));
 });
 
+app.get('/order', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views/order.html'));
+});
 // Serve driver.html as /driver
 app.get('/driver', function (req, res) {
   res.sendFile(path.join(__dirname, 'views/driver.html'));
