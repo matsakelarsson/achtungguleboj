@@ -97,9 +97,10 @@ var vm = new Vue({
       return marker;
     },
     orderTaxi: function() {
+            this.goToOrderconf();
             socket.emit("orderTaxi", { fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
                                        destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
-                                       orderItems: { passengers: 1, bags: 1, animals: "doge" }
+                                       orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs }
                                      });
     },
     handleClick: function (event) {
