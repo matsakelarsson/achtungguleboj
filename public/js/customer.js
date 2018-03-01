@@ -21,6 +21,8 @@ var vm = new Vue({
     travelers: 0,
     otherNeeds: false,
     travelShow: false,
+    customerTransporthtml: false,
+    infoTransporthtml: false,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -128,6 +130,7 @@ var vm = new Vue({
       this.customerhtml = true;
       this.infohtml = false;
       this.orderconfhtml = false;
+      this.infoTransporthtml = false;
       setTimeout(function(){ this.map.invalidateSize()}.bind(this), 100);
 
 
@@ -139,6 +142,16 @@ var vm = new Vue({
       this.customerhtml = false;
       this.infohtml = true;
       this.orderconfhtml = false;
+      this.infoTransporthtml = false;
+      this.showMap = "none";
+    },
+    goToInfoTransport: function() {
+      this.indexhtml = false;
+      this.customerhtml = false;
+      this.infohtml = false;
+      this.infoTransporthtml = true;
+      this.orderconfhtml = false;
+      this.infoTransporthtml = false;
       this.showMap = "none";
     },
     goToOrderconf: function() {
@@ -146,6 +159,7 @@ var vm = new Vue({
       this.customerhtml = false;
       this.infohtml = false;
       this.orderconfhtml = true;
+      this.infoTransporthtml = false;
 
       var checkbox = document.getElementsByName('check');
          var length = checkbox.length;
@@ -173,6 +187,8 @@ var vm = new Vue({
       this.customerhtml = false;
       this.infohtml = false;
       this.orderconfhtml = false;
+      this.customerTransporthtml = false;
+      this.infoTransporthtml = false;
 
     },
     }
