@@ -45,7 +45,20 @@ var vm = new Vue({
     }.bind(this));
 
     socket.on('taxiOrdered', function (order) {
-      this.$set(this.orders, order.orderId, order);
+      var date= new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+
+
+      if(order.orderItems.Hour>hour || ((order.orderItems.Hour==hour)&& (order.orderItems.Min>min)) ){
+        delete order.orderItems.Hour;
+        delete order.orderItems.Min;
+        this.$set(this.plannedorders, order.orderId, order);
+      } else {
+        delete order.orderItems.Hour;
+        delete order.orderItems.Min;
+        this.$set(this.orders, order.orderId, order);
+      }
       this.customerMarkers[order.orderId] = this.putCustomerMarkers(order);
     }.bind(this));
     socket.on('orderAccepted', function (order) {

@@ -99,10 +99,20 @@ var vm = new Vue({
       return marker;
     },
     orderTaxi: function() {
+            var date= new Date();
+            var hours =date.getHours();
+            var minutes=date.getMinutes();
+            if(hours<10){
+              hours = "0"+hours;
+            }
+            if(minutes<10) {
+              minutes= "0"+minutes;
+            }
+            var datetime = hours + ":" + minutes;
             this.goToOrderconf();
             socket.emit("orderTaxi", { fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
                                        destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
-                                       orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs }
+                                       orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs ,Time: datetime,Hour: date.getHours(),Min:date.getMinutes()}
                                      });
     },
     handleClick: function (event) {
