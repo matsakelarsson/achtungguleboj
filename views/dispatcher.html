@@ -24,6 +24,7 @@
         <h2>Pending</h2>
         <ul>
           <li v-for="order in orders" style="margin-bottom:1em;">
+            {{order}}
             # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }}, {{ order.fromLatLong[1].toFixed(3) }} Destination: {{ order.destLatLong[0].toFixed(3) }}, {{ order.destLatLong[1].toFixed(3) }}
             <ul v-for="(item, key) in order.orderItems">
               <li v-if="item.length!=0">
@@ -39,7 +40,8 @@
             </ul>
             <select v-on:change="assignTaxi(order)" v-model="order.taxiId" style="margin-top:0.8em;">
               <option disabled value="">Assign a taxi</option>
-              <optgroup v-for="taxi in taxis" >
+              <optgroup v-for="taxi in taxis" v-if="(taxi.taxiItems.Passengers>=order.orderItems.Passengers)">
+              <option>  {{taxi}}</option>
               <option :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
               <option disabled v-if="taxi.taxiItems.Passengers.length!=0"> Passenger capability {{taxi.taxiItems.Passengers}}</option>
               <option disabled v-if="taxi.taxiItems.Info.length!=0" v-for="info in taxi.taxiItems.Info"> {{info}}</option>
@@ -66,7 +68,7 @@
             </ul>
             <select v-on:change="assignTaxi(order)" v-model="order.taxiId" style="margin-top:0.8em;">
               <option disabled value="">Assign a taxi</option>
-              <optgroup v-for="taxi in taxis" >
+              <optgroup v-for="taxi in taxis">
               <option :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
               <option disabled v-if="taxi.taxiItems.Passengers.length!=0"> Passenger capability {{taxi.taxiItems.Passengers}}</option>
               <option disabled v-if="taxi.taxiItems.Info.length!=0" v-for="info in taxi.taxiItems.Info"> {{info}}</option>
