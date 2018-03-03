@@ -11,10 +11,15 @@ var vm = new Vue({
     taxiId: 0,
     taxiLocation: null,
     orders: {},
+    taxis: {},
     customerMarkers: {},
-	 driverhtml: false,
-	 ordershtml: false,
-   taxiInfohtml: true,
+    driverhtml: false,
+    ordershtml: false,
+    taxiInfohtml: true,
+    checkboxArr: [],
+    spaces: 0,
+    lat: 59.8415,
+    long: 17.648,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -35,14 +40,6 @@ var vm = new Vue({
       iconAnchor: [19,50]
     });
 
-    //Helper function, should probably not be here
-    function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-    // It's probably not a good idea to generate a random taxi number, client-side.
-    this.taxiId = getRandomInt(1, 1000000);
   },
   mounted: function () {
     // set up the map
@@ -55,7 +52,9 @@ var vm = new Vue({
         attribution: osmAttrib,
         maxZoom: 18
     }).addTo(this.map);
-    this.map.on('click', this.setTaxiLocation);
+    //this.map.on('click', this.setTaxiLocation);
+
+
   },
   beforeDestroy: function () {
     socket.emit('taxiQuit', this.taxiId);
@@ -63,10 +62,11 @@ var vm = new Vue({
   methods: {
     setTaxiLocation: function (event) {
       if (this.taxiLocation === null) {
-        this.taxiLocation = L.marker([event.latlng.lat, event.latlng.lng], {icon: this.taxiIcon, draggable: true}).addTo(this.map);
+        this.taxiLocation = L.marker([this.lat, this.long], {icon: this.taxiIcon, draggable: true}).addTo(this.map);
         this.taxiLocation.on("drag", this.moveTaxi);
         socket.emit("addTaxi", { taxiId: this.taxiId,
-                                latLong: [event.latlng.lat, event.latlng.lng]
+                                latLong: [this.lat, this.long],
+                                taxiItems: { Passengers: this.spaces, Info: this.checkboxArr }
                                 });
       }
       else {
@@ -121,6 +121,38 @@ var vm = new Vue({
 		var li = document.createElement("li");
 		this.orders.push(document.createTextNode("Pause"));
 		//ul.appendChild(li);
-	},
+  },
+   createTaxi: function() {
+      var checkbox = document.getElementsByName('check');
+         var length = checkbox.length;
+         for (var i = 0; i < length; ++i){
+           if (checkbox[i].checked){
+             this.checkboxArr.push(checkbox[i].value);
+             //this.infoArr.push(radio[i].value);
+           }
+         }
+         var taxiId = document.getElementById('IDs').value;
+         var amountOfSpaces = document.getElementById('spaces').value;
+         if (taxiId != ''){
+           this.IDs = true;
+         }
+         if (amountOfSpaces > 0){
+           this.travelShow = true;
+         }
+         this.taxiId = taxiId;
+         this.spaces = amountOfSpaces;
+
+         console.log(this.checkboxArr);
+         console.log(this.spaces);
+         console.log(this.taxiId);
+         this.setTaxiLocation();
+
+    },
+    handler: function() {
+      this.createTaxi();
+      this.goToDriver();
+
+    }
+
   }
 });

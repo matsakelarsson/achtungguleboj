@@ -23,33 +23,54 @@
       <div class="box pending">
         <h2>Pending</h2>
         <ul>
-          <li v-for="order in orders">
+          <li v-for="order in orders" style="margin-bottom:1em;">
             # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }}, {{ order.fromLatLong[1].toFixed(3) }} Destination: {{ order.destLatLong[0].toFixed(3) }}, {{ order.destLatLong[1].toFixed(3) }}
-            <ul>
-              <li v-for="(item, key) in order.orderItems"><br>
+            <ul v-for="(item, key) in order.orderItems">
+              <li v-if="item.length!=0">
                 {{ key + ": " + item }}
               </li>
+              <!--
+              <li v-for="(item, key) in order.orderItems"><br>
+                <template v-if="item!=null">
+                  {{ key + ": " + item }}
+                </template>
+              </li>
+            -->
             </ul>
-            <select v-on:change="assignTaxi(order)" v-model="order.taxiId">
+            <select v-on:change="assignTaxi(order)" v-model="order.taxiId" style="margin-top:0.8em;">
               <option disabled value="">Assign a taxi</option>
-              <option v-for="taxi in taxis" :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
+              <optgroup v-for="taxi in taxis" >
+              <option :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
+              <option disabled v-if="taxi.taxiItems.Passengers.length!=0"> Passenger capability {{taxi.taxiItems.Passengers}}</option>
+              <option disabled v-if="taxi.taxiItems.Info.length!=0" v-for="info in taxi.taxiItems.Info"> {{info}}</option>
+            </optgroup>
             </select> {{ order.taxiIdConfirmed }}
+
           </li>
         </ul>
       </div>
       <div class="box planned">
         <h2>Scheduled</h2>
         <ul>
-          <li v-for="order in plannedorders">
+          <li v-for="order in plannedorders" style="margin-bottom:1em;">
             # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }}, {{ order.fromLatLong[1].toFixed(3) }} Destination: {{ order.destLatLong[0].toFixed(3) }}, {{ order.destLatLong[1].toFixed(3) }}
-            <ul>
+            <ul v-for="(item, key) in order.orderItems">
+              <li v-if="item.length!=0">
+                {{ key + ": " + item }}
+              </li>
+              <!--
               <li v-for="(item, key) in order.orderItems">
                 {{ key + ": " + item }}
               </li>
+            -->
             </ul>
-            <select v-on:change="assignTaxi(order)" v-model="order.taxiId">
+            <select v-on:change="assignTaxi(order)" v-model="order.taxiId" style="margin-top:0.8em;">
               <option disabled value="">Assign a taxi</option>
-              <option v-for="taxi in taxis" :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
+              <optgroup v-for="taxi in taxis" >
+              <option :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
+              <option disabled v-if="taxi.taxiItems.Passengers.length!=0"> Passenger capability {{taxi.taxiItems.Passengers}}</option>
+              <option disabled v-if="taxi.taxiItems.Info.length!=0" v-for="info in taxi.taxiItems.Info"> {{info}}</option>
+            </optgroup>
             </select> {{ order.taxiIdConfirmed }}
           </li>
         </ul>
