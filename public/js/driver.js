@@ -52,8 +52,8 @@ var vm = new Vue({
         attribution: osmAttrib,
         maxZoom: 18
     }).addTo(this.map);
-    //this.map.on('click', this.setTaxiLocation);
-
+   this.map.on('click', this.setTaxiLocation);
+   console.log(this.lat, this.long);
 
   },
   beforeDestroy: function () {
@@ -61,6 +61,7 @@ var vm = new Vue({
   },
   methods: {
     setTaxiLocation: function (event) {
+
       if (this.taxiLocation === null) {
         this.taxiLocation = L.marker([this.lat, this.long], {icon: this.taxiIcon, draggable: true}).addTo(this.map);
         this.taxiLocation.on("drag", this.moveTaxi);
@@ -72,6 +73,7 @@ var vm = new Vue({
       else {
         this.taxiLocation.setLatLng(event.latlng);
         this.moveTaxi(event);
+         console.log(this.lat, this.long);
       }
     },
     moveTaxi: function (event) {
