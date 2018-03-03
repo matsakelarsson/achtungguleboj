@@ -39,8 +39,13 @@
             </ul>
             <select v-on:change="assignTaxi(order)" v-model="order.taxiId" style="margin-top:0.8em;">
               <option disabled value="">Assign a taxi</option>
-              <option v-for="taxi in taxis" :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
+              <optgroup v-for="taxi in taxis" >
+              <option :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
+              <option disabled v-if="taxi.taxiItems.Passengers.length!=0"> Passenger capability {{taxi.taxiItems.Passengers}}</option>
+              <option disabled v-if="taxi.taxiItems.Info.length!=0" v-for="info in taxi.taxiItems.Info"> {{info}}</option>
+            </optgroup>
             </select> {{ order.taxiIdConfirmed }}
+
           </li>
         </ul>
       </div>
@@ -61,7 +66,11 @@
             </ul>
             <select v-on:change="assignTaxi(order)" v-model="order.taxiId" style="margin-top:0.8em;">
               <option disabled value="">Assign a taxi</option>
-              <option v-for="taxi in taxis" :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
+              <optgroup v-for="taxi in taxis" >
+              <option :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
+              <option disabled v-if="taxi.taxiItems.Passengers.length!=0"> Passenger capability {{taxi.taxiItems.Passengers}}</option>
+              <option disabled v-if="taxi.taxiItems.Info.length!=0" v-for="info in taxi.taxiItems.Info"> {{info}}</option>
+            </optgroup>
             </select> {{ order.taxiIdConfirmed }}
           </li>
         </ul>
