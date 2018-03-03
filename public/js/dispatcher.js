@@ -59,6 +59,11 @@ var vm = new Vue({
       Vue.delete(this.customerMarkers, orderId);
     }.bind(this));
 
+
+
+
+
+
     // These icons are not reactive
     this.taxiIcon = L.icon({
       iconUrl: "img/taxi.png",

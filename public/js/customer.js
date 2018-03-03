@@ -23,6 +23,7 @@ var vm = new Vue({
     travelShow: false,
     customerTransporthtml: false,
     infoTransporthtml: false,
+    sched: false,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -105,6 +106,13 @@ var vm = new Vue({
                                        orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs }
                                      });
     },
+    bookTaxi: function() {
+            this.goToOrderconf();
+            socket.emit("bookTaxi", { fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
+                                       destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
+                                       orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs }
+                                     });
+    },
     handleClick: function (event) {
       // first click sets destination
       if (this.destMarker === null) {
@@ -147,9 +155,9 @@ var vm = new Vue({
       this.indexhtml = false;
       this.customerhtml = false;
       this.infohtml = false;
-      this.infoTransporthtml = true;
       this.orderconfhtml = false;
-      this.infoTransporthtml = false;
+      this.infoTransporthtml = true;
+      this.sched = true;
       this.showMap = "none";
     },
     goToOrderconf: function() {
