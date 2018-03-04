@@ -201,7 +201,7 @@
         <h1 style="text-align:left;font-size:15pt;" v-if="travelShow">Amount of travelers: {{travelers}}</h1><br>
         <h1 style="text-align:left;font-size:15pt;" v-if="otherNeeds">Other needs: {{needs}}</h1><br>
         <ul>
-          <li style="text-align:left;font-size:15pt;" v-for="check in checkboxArr">{{check}}</li><br><br><br><br>
+          <li style="text-align:left;font-size:15pt;" v-for="check in checkboxArr" v-if="check!=null">{{check}}</li><br><br><br><br>
         </ul>
       </div>
       </div>
