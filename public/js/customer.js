@@ -170,11 +170,15 @@ var vm = new Vue({
       this.infoTransporthtml = false;
 
       var checkbox = document.getElementsByName('check');
-         var length = checkbox.length;
+         var length = checkbox.length-4;
          for (var i = 0; i < length; ++i){
            if (checkbox[i].checked){
+             //this.checkboxArr[i]=checkbox[i].value;
              this.checkboxArr.push(checkbox[i].value);
              //this.infoArr.push(radio[i].value);
+           } else {
+             this.checkboxArr.push(null);
+             //this.checkboxArr[i]=null;
            }
          }
          var needs = document.getElementById('otherneeds').value;

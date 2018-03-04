@@ -127,8 +127,12 @@ var vm = new Vue({
          var length = checkbox.length;
          for (var i = 0; i < length; ++i){
            if (checkbox[i].checked){
-             this.checkboxArr.push(checkbox[i].value);
+             this.checkboxArr[i]=checkbox[i].value;
+             //this.checkboxArr.push(checkbox[i].value);
              //this.infoArr.push(radio[i].value);
+           }
+           else {
+             this.checkboxArr[i]=null;
            }
          }
          var taxiId = document.getElementById('IDs').value;
