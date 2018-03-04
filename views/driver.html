@@ -89,6 +89,9 @@
        <button v-on:click="acceptOrder(order)">ACCEPT</button><button v-on:click="finishOrder(order.orderId)">FINISH</button>
       </div>
      </ul>
+     <div class="pause" v-if="pause">
+        <h1>PAUSE</h1>
+     </div>
 		</div>
 	 </div>
 	 </main>

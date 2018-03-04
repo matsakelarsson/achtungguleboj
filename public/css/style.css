@@ -55,6 +55,14 @@ input[type="text"]
   border-radius: 1px;
   border-radius: 1em;
 }
+
+.pause{
+  background-color: blue;
+  border-style: solid;
+  border-radius: 1px;
+  border-radius: 1em;
+}
+
 #ordersButton{
   color:green;
 }
