@@ -77,6 +77,22 @@
 		<label for="persreqs" style="font-size:400%;height:20%;width:60%;  font-family: 'Concert One', cursive;">Orders</label><br><br><br><br>
 		</p>
 		<div id="orders">
+      <div id="orderInfo">
+      <li v-for="order in orders" v-if="order.taxiId==taxId" style="margin-bottom:1em;">
+        # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }}, {{ order.fromLatLong[1].toFixed(3) }} Destination: {{ order.destLatLong[0].toFixed(3) }}, {{ order.destLatLong[1].toFixed(3) }}
+        <ul > <!-- v-for="(item, key) in order.orderItems"-->
+          <li  > <!--v-if="item.length!=0"-->
+            <!--{{ key + ": " + item }}-->
+            <div style="display:inline" v-if="order.orderItems.Info.length!=0">
+            Info:
+            <div v-for="item in order.orderItems.Info" style="display:inline" v-if="item !=null">
+              {{item}},
+            </div>
+            <li>Passengers {{order.orderItems.Passengers}}</li>
+            <li v-if="order.orderItems.Needs.length!=0">Needs: {{order.orderItems.Needs}}</li>
+            <li> Time: {{order.orderItems.Time}}</li>
+            <br>
+<!--
       <div v-for="order in orders" v-if="order.taxiId == taxiId" id="orderInfo">
        # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }},
        {{ order.fromLatLong[1].toFixed(3) }}
@@ -84,7 +100,7 @@
        {{ order.destLatLong[1].toFixed(3) }}
          <div v-for="item in order.orderItems">
           {{ item }}
-        </div>
+        </div> -->
        <br>
        <button v-on:click="acceptOrder(order)">ACCEPT</button><button v-on:click="finishOrder(order.orderId)">FINISH</button>
       </div>

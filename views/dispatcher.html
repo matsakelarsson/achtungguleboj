@@ -34,6 +34,10 @@
                   {{item}},
                 </div>
               </li>
+              <li>Passengers {{order.orderItems.Passengers}}</li>
+              <li v-if="order.orderItems.Needs.length!=0">Needs: {{order.orderItems.Needs}}</li>
+              <li> Time: {{order.orderItems.Time}}</li>
+
               <!--
               <li v-for="(item, key) in order.orderItems"><br>
                 <template v-if="item!=null">
