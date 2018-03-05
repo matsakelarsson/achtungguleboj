@@ -25,6 +25,9 @@ var vm = new Vue({
     infoTransporthtml: false,
     sched: false,
     cancelled: false,
+    hour:null,
+    min:null,
+    time:null,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -102,7 +105,7 @@ var vm = new Vue({
     },
     orderTaxi: function() {
             var date= new Date();
-            var hours =date.getHours();
+            /*var hours =date.getHours();
             var minutes=date.getMinutes();
             if(hours<10){
               hours = "0"+hours;
@@ -110,11 +113,11 @@ var vm = new Vue({
             if(minutes<10) {
               minutes= "0"+minutes;
             }
-            var datetime = hours + ":" + minutes;
+            var datetime = hours + ":" + minutes;*/
             this.goToOrderconf();
             socket.emit("orderTaxi", { fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
                                        destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
-                                       orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs ,Time: datetime,Hour: date.getHours(),Min:date.getMinutes()}
+                                       orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs ,Time: this.time,Hour: this.hour, Min: this.min}
                                      });
     },
     cancelTaxi: function() {
@@ -200,6 +203,13 @@ var vm = new Vue({
          this.needs = needs;
          this.travelers = amountOfTravelers;
 
+         var times = document.getElementById('timeinput').value;
+         console.log(document.getElementById('timeinput').value);
+         this.hour = times.split(":")[0];
+         this.min = times.split(":")[1];
+         this.time=times;
+         console.log(this.hour);
+         console.log(this.min);
          console.log(this.checkboxArr);
     },
     goToIndex: function() {
