@@ -18,6 +18,10 @@ Do not use this skeleton code for creating production apps. Security and stabili
 
 That should be enough to get started. Happy tinkering!
 
-Burndownchart
+Burndownchart Sprint 1
 
 https://docs.google.com/spreadsheets/d/1mlLCaF66gpmS21sG-uCXPw0NzjV8_YttVipb6cOAHPY/edit#gid=0
+
+Burndown Sprint 2
+
+https://docs.google.com/spreadsheets/d/1vNXuEEl2IyLKtXWsScAuYC2f9iDdifKW6sXITVuW5Zs/edit#gid=0
