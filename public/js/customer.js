@@ -23,6 +23,8 @@ var vm = new Vue({
     travelShow: false,
     customerTransporthtml: false,
     infoTransporthtml: false,
+    sched: false,
+    cancelled: false,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -115,6 +117,12 @@ var vm = new Vue({
                                        orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs ,Time: datetime,Hour: date.getHours(),Min:date.getMinutes()}
                                      });
     },
+    cancelTaxi: function() {
+
+            this.cancelled = true;
+            socket.emit("finishOrder", this.orderId);
+
+    },
     handleClick: function (event) {
       // first click sets destination
       if (this.destMarker === null) {
@@ -157,9 +165,9 @@ var vm = new Vue({
       this.indexhtml = false;
       this.customerhtml = false;
       this.infohtml = false;
-      this.infoTransporthtml = true;
       this.orderconfhtml = false;
-      this.infoTransporthtml = false;
+      this.infoTransporthtml = true;
+      this.sched = true;
       this.showMap = "none";
     },
     goToOrderconf: function() {
@@ -170,11 +178,15 @@ var vm = new Vue({
       this.infoTransporthtml = false;
 
       var checkbox = document.getElementsByName('check');
-         var length = checkbox.length;
+         var length = checkbox.length-4;
          for (var i = 0; i < length; ++i){
            if (checkbox[i].checked){
+             //this.checkboxArr[i]=checkbox[i].value;
              this.checkboxArr.push(checkbox[i].value);
              //this.infoArr.push(radio[i].value);
+           } else {
+             this.checkboxArr.push(null);
+             //this.checkboxArr[i]=null;
            }
          }
          var needs = document.getElementById('otherneeds').value;
@@ -197,6 +209,11 @@ var vm = new Vue({
       this.orderconfhtml = false;
       this.customerTransporthtml = false;
       this.infoTransporthtml = false;
+
+    },
+
+    goToIndexReload: function() {
+      location.reload();
 
     },
     }

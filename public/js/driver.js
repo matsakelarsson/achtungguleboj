@@ -20,6 +20,7 @@ var vm = new Vue({
     spaces: 0,
     lat: 59.8415,
     long: 17.648,
+    pause: false,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -121,7 +122,8 @@ var vm = new Vue({
 	 addElem: function() {
 		var ul = document.getElementById("list");
 		var li = document.createElement("li");
-		this.orders.push(document.createTextNode("Pause"));
+		//this.orders[this.pause] = document.createTextNode("Pause");
+    this.pause = true;
 		//ul.appendChild(li);
   },
    createTaxi: function() {
@@ -129,8 +131,12 @@ var vm = new Vue({
          var length = checkbox.length;
          for (var i = 0; i < length; ++i){
            if (checkbox[i].checked){
-             this.checkboxArr.push(checkbox[i].value);
+             this.checkboxArr[i]=checkbox[i].value;
+             //this.checkboxArr.push(checkbox[i].value);
              //this.infoArr.push(radio[i].value);
+           }
+           else {
+             this.checkboxArr[i]=null;
            }
          }
          var taxiId = document.getElementById('IDs').value;
