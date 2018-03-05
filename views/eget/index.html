@@ -59,11 +59,11 @@
     <div v-show="customerhtml" class="customerhtml">
       <div class="backbtn">
         <img v-on:click="goToIndex" src="img/arrow.svg" width="80px">
+        <img style="text-align:center;" src="img/achtung.png" width="55%">
+        <p style="height:1px;background-color:black"></p>
       </div>
-      <h1>
-        Where do you WANNA go?
-      </h1>
-      <p style="font-size:150%">Search for destination first, then pick-up location</p>
+
+      <p style="font-size:150%">Your journey</p>
       <div>
         <div>
         <div id="my-map"></div><br><br>
@@ -82,11 +82,10 @@
     <div v-show="customerTransporthtml" class="customerTransporthtml">
       <div class="backbtn">
         <img v-on:click="goToIndex" src="img/arrow.svg" width="80px">
+        <img style="text-align:center;" src="img/achtung.png" width="55%">
+        <p style="height:1px;background-color:black"></p>
       </div>
-      <h1>
-        Where do you WANNA go?
-      </h1>
-      <p style="font-size:150%">Search for destination first, then pick-up location</p>
+        <p style="font-size:150%">Your journey</p>
       <div>
         <div>
         <div id="my-map"></div><br><br>
@@ -110,8 +109,10 @@
     <div v-show="infohtml" class="infohtml">
       <div class=backbtn>
       <img v-on:click="goToCustomer" src="img/arrow.svg" width="80px">
+      <img src="img/achtung.png" style="width:55%;">
+      <p style="height:1px;background-color:black"></p>
     </div>
-    <img src="img/achtung.png" style="width:50%;">
+
     <form id="kundinfo">
       <p>
         <p>
@@ -160,8 +161,9 @@
     <div v-show="infoTransporthtml" class="infoTransporthtml">
       <div class=backbtn>
       <img v-on:click="goToIndex" src="img/arrow.svg" width="80px">
+      <img src="img/achtung.png" style="width:55%;">
+      <p style="height:1px;background-color:black"></p>
     </div>
-    <img src="img/achtung.png" style="width:50%;">
     <form id="kundinfo">
       <p>
         <p>
@@ -210,14 +212,15 @@
 
     <div v-show="orderconfhtml" class="orderconfhtml">
       <div>
-        <img src="img/achtung.png" style="width:50%;">
+        <img src="img/achtung.png" style="width:55%;">
+        <p style="height:1px;background-color:black"></p>
         <h1 style="font-size: 25pt;">Order confirmation</h1>
         <h1 style="font-size: 20pt" >Your order has been processed!</h1>
       <!--  <h2 style="font-size: 20pt;">Approx time until pickup: 1h</h2> -->
       <div class="order">
         <h2 style="text-align:center;font-size:20pt;">Your Order:</h2>
-        <h1 style="text-align:left;font-size:15pt;" v-if="travelShow">Amount of travelers: {{travelers}}</h1><br>
-        <h1 style="text-align:left;font-size:15pt;" v-if="otherNeeds">Other needs: {{needs}}</h1><br>
+        <h1 style="text-align:center;font-size:15pt;" v-if="travelShow">Amount of travelers: {{travelers}}</h1><br>
+        <h1 style="text-align:center;font-size:15pt;" v-if="otherNeeds">Other needs: {{needs}}</h1><br>
         <ul>
           <li style="text-align:left;font-size:15pt;" v-for="check in checkboxArr" v-if="check!=null">{{check}}</li><br><br><br><br>
         </ul>
