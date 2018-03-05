@@ -91,6 +91,9 @@ var vm = new Vue({
         this.customerMarkers = this.putCustomerMarkers(order);
         order.taxiIdConfirmed = this.taxiId;
         socket.emit("orderAccepted", order);
+        //set #orderInfo to green
+        document.getElementById('orderInfo').style.cssText =
+        'background-color: #00ff00; border-style: solid; border-radius: 0.5px; border-radius: 1em;';
     },
     finishOrder: function (orderId) {
       Vue.delete(this.orders, orderId);
