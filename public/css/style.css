@@ -50,9 +50,9 @@ input[type="text"]
 }
 
 #orderInfo{
-  background-color: blue;
+  background-color: #ffff80;
   border-style: solid;
-  border-radius: 1px;
+  border-radius: 0.5px;
   border-radius: 1em;
 }
 
