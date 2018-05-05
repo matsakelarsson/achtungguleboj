@@ -294,8 +294,8 @@ var vm = new Vue({
          this.checkboxArr.push("Medical Transportnumber: "+personnummer1);
          this.travelers = amountOfTravelers;
 
-         var times = document.getElementById('timeinput').value;
-         console.log(document.getElementById('timeinput').value);
+         var times = document.getElementById('timeinputs').value;
+         console.log(document.getElementById('timeinputs').value);
          this.hour = times.split(":")[0];
          this.min = times.split(":")[1];
          this.time = times;
