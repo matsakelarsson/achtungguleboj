@@ -9,6 +9,7 @@ var vm = new Vue({
   data: {
     orderId: null,
     map: null,
+    medical: false,
     fromMarker: null,
     destMarker: null,
     taxiMarkers: {},
@@ -139,8 +140,8 @@ var vm = new Vue({
             }
             var datetime = hours + ":" + minutes;*/
             this.goToOrderconfTransport();
-            socket.emit("orderTaxi", { fromLatLong: [null, null],
-                                       destLatLong: [null, null],
+            socket.emit("orderTaxi", { fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
+                                       destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
                                        orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs ,Time: this.time,Hour: this.hour, Min: this.min, Personnummer: this.personnummer1, Dest: this.dest, FromAdress: this.fromAdress}
                                      });
     },
@@ -181,12 +182,22 @@ var vm = new Vue({
     },
 
     goToInfo: function() {
+      if(this.medical==false){
       this.indexhtml = false;
       this.customerhtml = false;
       this.infohtml = true;
       this.orderconfhtml = false;
       this.infoTransporthtml = false;
       this.showMap = "none";
+    }else {
+      this.indexhtml = false;
+      this.customerhtml = false;
+      this.infohtml = false;
+      this.orderconfhtml = false;
+      this.infoTransporthtml = false;
+      this.showMap = "none";
+      this.orderTaxiTransport();
+    }
     },
     goToInfoTransport: function() {
       this.indexhtml = false;
@@ -251,13 +262,14 @@ var vm = new Vue({
 
     goToFromDest: function() {
       this.indexhtml = false;
-      this.customerhtml = false;
+      this.customerhtml = true;
       this.infohtml = false;
       this.orderconfhtml = false;
       this.infoTransporthtml = false;
       this.transportMaphtml = false;
-      this.transportMaphtml = true;
-
+      this.transportMaphtml = false;
+      setTimeout(function(){ this.map.invalidateSize()}.bind(this), 100);
+      this.medical=true;
       var checkbox = document.getElementsByName('check1');
          var length = checkbox.length;
          for (var i = 0; i < length; ++i){
@@ -279,6 +291,7 @@ var vm = new Vue({
            this.travelShow = true;
          }
          this.personnummer1 = personnummer1;
+         this.checkboxArr.push("Medical Transportnumber: "+personnummer1);
          this.travelers = amountOfTravelers;
 
          var times = document.getElementById('timeinput').value;
@@ -299,7 +312,7 @@ var vm = new Vue({
       this.orderconfhtml = true;
       this.infoTransporthtml = false;
       this.transportMaphtml = false;
-
+/*
          var fromadress = document.getElementById('fromadress').value;
          var dest = document.getElementById('dest').value;
          if (fromadress != ''){
@@ -312,7 +325,7 @@ var vm = new Vue({
          this.fromAdress = fromadress;
          console.log(this.dest);
          console.log(this.fromAdress);
-
+*/
     },
     goToIndex: function() {
       this.indexhtml = true;
