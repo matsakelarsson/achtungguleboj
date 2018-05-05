@@ -66,6 +66,7 @@ var vm = new Vue({
     }.bind(this));
     socket.on('orderFinished', function (orderId) {
       Vue.delete(this.orders, orderId);
+      Vue.delete(this.plannedorders, orderId);
       this.map.removeLayer(this.customerMarkers[orderId].from);
       this.map.removeLayer(this.customerMarkers[orderId].dest);
       this.map.removeLayer(this.customerMarkers[orderId].line);

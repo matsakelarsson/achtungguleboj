@@ -18,16 +18,23 @@ var vm = new Vue({
     orderconfhtml: false,
     checkboxArr: [],
     needs: '',
+    personnummer1: 0,
     travelers: 0,
     otherNeeds: false,
+    personnummer: false,
     travelShow: false,
     customerTransporthtml: false,
     infoTransporthtml: false,
+    transportMaphtml: false,
     sched: false,
     cancelled: false,
     hour:null,
     min:null,
     time:null,
+    dest: '',
+    fromAdress: '',
+    showDest: false,
+    showFromAdress: false,
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -120,6 +127,23 @@ var vm = new Vue({
                                        orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs ,Time: this.time,Hour: this.hour, Min: this.min}
                                      });
     },
+    orderTaxiTransport: function() {
+            var date= new Date();
+            /*var hours =date.getHours();
+            var minutes=date.getMinutes();
+            if(hours<10){
+              hours = "0"+hours;
+            }
+            if(minutes<10) {
+              minutes= "0"+minutes;
+            }
+            var datetime = hours + ":" + minutes;*/
+            this.goToOrderconfTransport();
+            socket.emit("orderTaxi", { fromLatLong: [null, null],
+                                       destLatLong: [null, null],
+                                       orderItems: { Passengers: this.travelers, Info: this.checkboxArr, Needs: this.needs ,Time: this.time,Hour: this.hour, Min: this.min, Personnummer: this.personnummer1, Dest: this.dest, FromAdress: this.fromAdress}
+                                     });
+    },
     cancelTaxi: function() {
 
             this.cancelled = true;
@@ -173,15 +197,27 @@ var vm = new Vue({
       this.sched = true;
       this.showMap = "none";
     },
+    goToTransportMap: function() {
+      this.indexhtml = false;
+      this.customerhtml = false;
+      this.transportMaphtml = true;
+      this.infohtml = false;
+      this.orderconfhtml = false;
+      this.infoTransporthtml = false;
+
+
+
+    },
     goToOrderconf: function() {
       this.indexhtml = false;
       this.customerhtml = false;
       this.infohtml = false;
       this.orderconfhtml = true;
       this.infoTransporthtml = false;
+      this.transportMaphtml = false;
 
       var checkbox = document.getElementsByName('check');
-         var length = checkbox.length-4;
+         var length = checkbox.length;
          for (var i = 0; i < length; ++i){
            if (checkbox[i].checked){
              //this.checkboxArr[i]=checkbox[i].value;
@@ -211,6 +247,72 @@ var vm = new Vue({
          console.log(this.hour);
          console.log(this.min);
          console.log(this.checkboxArr);
+    },
+
+    goToFromDest: function() {
+      this.indexhtml = false;
+      this.customerhtml = false;
+      this.infohtml = false;
+      this.orderconfhtml = false;
+      this.infoTransporthtml = false;
+      this.transportMaphtml = false;
+      this.transportMaphtml = true;
+
+      var checkbox = document.getElementsByName('check1');
+         var length = checkbox.length;
+         for (var i = 0; i < length; ++i){
+           if (checkbox[i].checked){
+             //this.checkboxArr[i]=checkbox[i].value;
+             this.checkboxArr.push(checkbox[i].value);
+             //this.infoArr.push(radio[i].value);
+           } else {
+             this.checkboxArr.push(null);
+             //this.checkboxArr[i]=null;
+           }
+         }
+         var personnummer1 = document.getElementById('personnummer').value;
+         var amountOfTravelers = document.getElementById('travelers').value;
+         if (personnummer1 != 0){
+           this.personnummer = true;
+         }
+         if (amountOfTravelers > 0){
+           this.travelShow = true;
+         }
+         this.personnummer1 = personnummer1;
+         this.travelers = amountOfTravelers;
+
+         var times = document.getElementById('timeinput').value;
+         console.log(document.getElementById('timeinput').value);
+         this.hour = times.split(":")[0];
+         this.min = times.split(":")[1];
+         this.time = times;
+         console.log(this.hour);
+         console.log(this.min);
+         console.log(this.checkboxArr);
+         console.log(this.personnummer1);
+         console.log(this.travelers);
+    },
+    goToOrderconfTransport: function() {
+      this.indexhtml = false;
+      this.customerhtml = false;
+      this.infohtml = false;
+      this.orderconfhtml = true;
+      this.infoTransporthtml = false;
+      this.transportMaphtml = false;
+
+         var fromadress = document.getElementById('fromadress').value;
+         var dest = document.getElementById('dest').value;
+         if (fromadress != ''){
+           this.showFromAdress = true;
+         }
+         if (dest != ''){
+           this.showDest = true;
+         }
+         this.dest = dest;
+         this.fromAdress = fromadress;
+         console.log(this.dest);
+         console.log(this.fromAdress);
+
     },
     goToIndex: function() {
       this.indexhtml = true;
